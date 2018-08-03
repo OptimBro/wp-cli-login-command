@@ -79,7 +79,7 @@ class LoginCommand
         if (WP_CLI\Utils\get_flag_value($assoc, 'launch')) {
             $this->launch($magic_url);
         }
-        WP_CLI::success($magic_url);
+        exit;
     }
 
     /**
