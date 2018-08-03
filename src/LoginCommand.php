@@ -66,7 +66,7 @@ class LoginCommand
         $magic_url = $this->makeMagicUrl($user, $assoc['expires']);
 
         if (WP_CLI\Utils\get_flag_value($assoc, 'url-only')) {
-            WP_CLI::line($magic_url);
+            WP_CLI::success($magic_url);
             exit;
         }
 
@@ -79,7 +79,7 @@ class LoginCommand
         if (WP_CLI\Utils\get_flag_value($assoc, 'launch')) {
             $this->launch($magic_url);
         }
-        exit;
+        WP_CLI::success($magic_url);
     }
 
     /**
@@ -311,12 +311,13 @@ class LoginCommand
             WP_CLI::error('Plugin install failed.');
         }
 
-        WP_CLI::success('Companion plugin installed.');
-
         if (WP_CLI\Utils\get_flag_value($assoc, 'activate')) {
             $this->toggle(['on']);
         }
+        
+        WP_CLI::success('Companion plugin installed.');
         exit;
+        
     }
 
     /**
